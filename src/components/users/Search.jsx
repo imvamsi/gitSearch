@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 export class Search extends Component {
   state = {
     text: ""
   };
 
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired
+  };
   handleChange = e => {
     this.setState({ text: e.target.value });
   };
@@ -19,8 +24,10 @@ export class Search extends Component {
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
           <input
+            id="mainInput"
             type="text"
             name="text"
+            value={this.state.text}
             placeholder="search for users"
             onChange={this.handleChange}
           />
@@ -30,6 +37,14 @@ export class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        {this.props.showClear && (
+          <button
+            className="btn btn-light btn-block "
+            onClick={this.props.clearUsers}
+          >
+            Clear
+          </button>
+        )}
       </div>
     );
   }

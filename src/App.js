@@ -25,6 +25,11 @@ class App extends Component {
   //   this.setState({ users: response.data, loading: false });
   // }
 
+  //clear users
+  clearUsers = users => {
+    this.setState({ users: [] });
+  };
+
   //search the users
 
   searchUsers = async text => {
@@ -44,7 +49,11 @@ class App extends Component {
         <Navbar />
 
         <div className="container">
-          <Search searchUsers={this.searchUsers} />
+          <Search
+            searchUsers={this.searchUsers}
+            clearUsers={this.clearUsers}
+            showClear={this.state.users.length > 0 ? true : false}
+          />
           <Users users={this.state.users} loading={this.state.loading} />
         </div>
       </div>
