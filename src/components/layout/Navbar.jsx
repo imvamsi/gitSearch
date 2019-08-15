@@ -13,10 +13,10 @@ const Navbar = props => {
 
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link href="/about">About</Link>
           </li>
         </ul>
       </nav>
