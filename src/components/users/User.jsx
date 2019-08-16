@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from "react";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import Repos from "../repos/Repos";
 
 export class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
+    this.props.getUserRepos(this.props.match.params.login);
   }
 
   render() {
@@ -92,9 +95,16 @@ export class User extends Component {
             </div>
           </div>
         </div>
+        <Repos repos={this.props.repos} />
       </div>
     );
   }
 }
 
+User.propTypes = {
+  user: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  getUser: PropTypes.func.isRequired,
+  getUserRepos: PropTypes.array.isRequired
+};
 export default User;
