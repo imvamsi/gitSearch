@@ -76,6 +76,7 @@ class App extends Component {
       }&client_secret=${process.env.REACT_APP_GITHUB_CLENT_SECRET}`
     );
     this.setState({ repos: res.data, loading: false });
+    console.log(this.state.repos);
   };
   render() {
     return (

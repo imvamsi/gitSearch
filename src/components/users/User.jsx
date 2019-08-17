@@ -5,12 +5,14 @@ import PropTypes from "prop-types";
 import Repos from "../repos/Repos";
 
 export class User extends Component {
+  //Passing the method from app.js as props
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
     this.props.getUserRepos(this.props.match.params.login);
   }
 
   render() {
+    //the user props contain all these items
     const {
       name,
       avatar_url,
@@ -95,6 +97,7 @@ export class User extends Component {
             </div>
           </div>
         </div>
+        {/* Repo section with all the repositories to max limit 5 */}
         <Repos repos={this.props.repos} />
       </div>
     );
@@ -105,6 +108,6 @@ User.propTypes = {
   user: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.array.isRequired
+  getUserRepos: PropTypes.func.isRequired
 };
 export default User;

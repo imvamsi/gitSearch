@@ -8,13 +8,14 @@ const Navbar = props => {
       <nav className="navbar bg-primary">
         <h2>
           <i className={props.icon} style={{ marginright: "10px" }} />
-          {props.title}
+
+          <Link to="/">{props.title}</Link>
         </h2>
 
         <ul>
-          <li>
+          {/* <li>
             <Link to="/">Home</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/about">About</Link>
           </li>
