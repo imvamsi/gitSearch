@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
+import GitContext from "../../context/git/GitContext";
 const Search = ({ setAlert, searchUsers, clearUsers, showClear }) => {
   const [text, setText] = useState("");
-
+  const gitContext = useContext(GitContext);
   const handleChange = e => {
     setText(e.target.value);
   };
@@ -12,7 +13,7 @@ const Search = ({ setAlert, searchUsers, clearUsers, showClear }) => {
     if (text === "") {
       setAlert("please enter something", "light");
     } else {
-      searchUsers(text);
+      gitContext.searchUsers(text);
       setText("");
     }
   };

@@ -46,24 +46,10 @@ const App = () => {
 
   //clear users
   const clearUsers = users => {
-    this.setState({ users: [] });
+    setUsers([]);
   };
 
   //search the users
-
-  const searchUsers = async text => {
-    setLoading(true);
-    console.log(text);
-    const res = await Axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${
-        process.env.REACT_APP_GITHUB_CLENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLENT_SECRET}`
-    );
-    console.log(res);
-    // this.setState({ users: res.data.items, loading: false });
-    setUsers(res.data.items);
-    setLoading(false);
-  };
 
   //get details of a single github user
 
@@ -110,7 +96,6 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
