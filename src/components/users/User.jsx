@@ -1,19 +1,20 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Repos from "../repos/Repos";
+import GitContext from "../../context/git/GitContext";
 
-const User = ({ repos, getUser, getUserRepos, user, loading, match }) => {
+const User = ({ match }) => {
   //Passing the method from app.js as props
   // componentDidMount() {
   //   this.props.getUser(this.props.match.params.login);
   //   this.props.getUserRepos(this.props.match.params.login);
   // }
-
+  const gitContext = useContext(GitContext);
   useEffect(() => {
-    getUser(match.params.login);
-    getUserRepos(match.params.login);
+    gitContext.getUser(match.params.login);
+    gitContext.getUserRepos(match.params.login);
     //eslint-disable-next-line
   }, []);
 
@@ -32,8 +33,8 @@ const User = ({ repos, getUser, getUserRepos, user, loading, match }) => {
     hireable,
     public_repos,
     public_gists
-  } = user;
-  if (loading) {
+  } = gitContext.user;
+  if (gitContext.loading) {
     return <Spinner />;
   }
 
@@ -103,15 +104,9 @@ const User = ({ repos, getUser, getUserRepos, user, loading, match }) => {
         </div>
       </div>
       {/* Repo section with all the repositories to max limit 5 */}
-      <Repos repos={repos} />
+      <Repos repos={gitContext.repos} />
     </div>
   );
 };
 
-User.propTypes = {
-  user: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired
-};
 export default User;

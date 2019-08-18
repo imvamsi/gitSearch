@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
+import GitContext from "../../context/git/GitContext";
 
-const Users = ({ users, loading }) => {
-  if (loading) {
+const Users = () => {
+  const gitContext = useContext(GitContext);
+  if (gitContext.loading) {
     return <Spinner />;
   } else {
     return (
       <div style={userStyle}>
-        {users.map(user => (
+        {gitContext.users.map(user => (
           <UserItem key={user.id} user={user} />
         ))}
       </div>
@@ -24,8 +26,3 @@ const userStyle = {
 };
 
 export default Users;
-
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
-};

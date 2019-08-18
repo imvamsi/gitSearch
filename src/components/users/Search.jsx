@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import GitContext from "../../context/git/GitContext";
-const Search = ({ setAlert, searchUsers, clearUsers, showClear }) => {
+const Search = ({ setAlert }) => {
   const [text, setText] = useState("");
   const gitContext = useContext(GitContext);
   const handleChange = e => {
@@ -35,8 +35,11 @@ const Search = ({ setAlert, searchUsers, clearUsers, showClear }) => {
           className="btn btn-dark btn-block"
         />
       </form>
-      {showClear && (
-        <button className="btn btn-light btn-block " onClick={clearUsers}>
+      {gitContext.users.length > 0 && (
+        <button
+          className="btn btn-light btn-block "
+          onClick={gitContext.clearUsers}
+        >
           Clear
         </button>
       )}
@@ -45,9 +48,6 @@ const Search = ({ setAlert, searchUsers, clearUsers, showClear }) => {
 };
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired
 };
 

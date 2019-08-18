@@ -39,9 +39,43 @@ const GitState = props => {
       payload: res.data.items
     });
   };
+  //clear users
+  const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
   //set loading
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  //get details of a single github user
+
+  const getUser = async username => {
+    setLoading();
+    const res = await Axios.get(
+      `https://api.github.com/users/${username}?client_id=${
+        process.env.REACT_APP_GITHUB_CLENT_ID
+      }&client_secret=${process.env.REACT_APP_GITHUB_CLENT_SECRET}`
+    );
+    //this.setState({ user: res.data, loading: false });
+    dispatch({
+      type: GET_USER,
+      payload: res.data
+    });
+  };
+
+  //get the repos of that user
+  const getUserRepos = async username => {
+    // this.setState({ loading: true });
+    setLoading();
+    const res = await Axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${
+        process.env.REACT_APP_GITHUB_CLENT_ID
+      }&client_secret=${process.env.REACT_APP_GITHUB_CLENT_SECRET}`
+    );
+    //this.setState({ repos: res.data, loading: false });
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data
+    });
+  };
 
   return (
     <GitContext.Provider
@@ -50,7 +84,10 @@ const GitState = props => {
         users: state.users,
         repos: state.repos,
         loading: state.loading,
-        searchUsers
+        searchUsers,
+        clearUsers,
+        getUser,
+        getUserRepos
       }}
     >
       {props.children}
