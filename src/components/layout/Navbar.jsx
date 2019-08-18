@@ -13,9 +13,9 @@ const Navbar = props => {
         </h2>
 
         <ul>
-          {/* <li>
+          <li>
             <Link to="/">Home</Link>
-          </li> */}
+          </li>
           <li>
             <Link to="/about">About</Link>
           </li>

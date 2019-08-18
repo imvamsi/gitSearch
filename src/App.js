@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Navbar from "./components/layout/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/pages/About";
 //import UserItem from "./components/users/UserItem";
-import Users from "./components/users/Users";
+import NotFound from "./components/pages/NotFound";
 import User from "./components/users/User";
-import Search from "./components/users/Search";
+import Home from "./components/pages/Home";
 import Alert from "./components/layout/Alert";
 import GitState from "./context/git/GitState";
+import AlertState from "./context/alert/AlertState";
 import "./App.css";
-import Axios from "axios";
 
 const App = () => {
   // state = {
@@ -19,8 +19,6 @@ const App = () => {
   //   user: {},
   //   alert: null
   // };
-
-  const [alert, setAlert] = useState(null);
 
   // async componentDidMount() {
   //   console.log(process.env);
@@ -34,38 +32,26 @@ const App = () => {
   //   this.setState({ users: response.data, loading: false });
   // }
 
-  const showAlert = (msg, type) => {
-    //this.setState({ alert: { msg: msg, type: type } });
-    setAlert({ msg: msg, type: type });
-    setTimeout(() => setAlert({ alert: null }), 1000);
-  };
-
   return (
     <GitState>
-      <Router>
-        <div className="App">
-          <Navbar />
+      <AlertState>
+        <Router>
+          <div className="App">
+            <Navbar />
 
-          <div className="container">
-            <Alert alert={alert} />
-            <Switch>
-              {/* render multiple components in a single route */}
-              <Route
-                exact
-                path="/"
-                render={props => (
-                  <Fragment>
-                    <Search setAlert={showAlert} />
-                    <Users />
-                  </Fragment>
-                )}
-              />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/user/:login" component={User} />
-            </Switch>
+            <div className="container">
+              <Alert />
+              <Switch>
+                {/* render multiple components in a single route */}
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/user/:login" component={User} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertState>
     </GitState>
   );
 };
