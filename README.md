@@ -2,4 +2,4 @@
 
 # gitSearch
 
-> Application to look up the github user profiles worldwide using Github version 3 REST API's in a more efficient way than the dreaded github search.  Fetches the user data and detailed information about the specific user profile such as their latest repos, their intro, github status(followers, following, hireable or not and so on.
+> Application to look up the github user profiles worldwide using Github version 3 REST API's in a more efficient way than the dreaded github search.  Fetches the user data and detailed information about the specific user profile such as their latest repos, their intro, github stats(followers, following, hireable or not) and so on.
