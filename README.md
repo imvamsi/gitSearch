@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/badge/build-passing-green"> <img src="https://img.shields.io/badge/version-1.-yellow"> <img src ="https://img.shields.io/badge/website-live-blue"> <img src="https://img.shields.io/badge/contributor-1-orange">
+<img src="https://img.shields.io/badge/build-passing-green">  <img src="https://img.shields.io/badge/version-1.-yellow">  <img src ="https://img.shields.io/badge/website-live-blue">  <img src="https://img.shields.io/badge/contributor-1-orange">
 
 # gitSearch
 
